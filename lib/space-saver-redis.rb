@@ -20,6 +20,10 @@ class SpaceSaver
     @redis.zrevrange(leaderboard, 0, k-1, withscores: true)
   end
 
+  def remove(leaderboard, value)
+    @redis.zrem(leaderboard, value)
+  end
+
   def reset(leaderboard)
     @redis.del(leaderboard)
   end

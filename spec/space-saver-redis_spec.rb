@@ -48,4 +48,11 @@ describe SpaceSaver do
     s.reset("leaderboard")
     s.leaders("leaderboard").size.should == 0
   end
+  it "can remove specified value from leaderboard" do
+    s = SpaceSaver.new(Redis.new, 3)
+    s.increment("leaderboard", "foo")
+    s.increment("leaderboard", "bar")
+    s.remove("leaderboard", "foo")
+    s.leaders("leaderboard").size.should == 1
+  end
 end
